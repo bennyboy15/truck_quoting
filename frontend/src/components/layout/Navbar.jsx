@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Bell, Home, LogOut, User, Users } from "lucide-react";
+import { LogOut, User, } from "lucide-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { axiosInstance } from "../../lib/axios";
 import { useCurrentUser } from "../../hooks/useCurrentUser";
@@ -13,12 +13,12 @@ const Navbar = () => {
     const { data: current_user } = useCurrentUser();
 
     const { mutate: logout } = useMutation({
-		mutationFn: () => axiosInstance.post("/auth/logout"),
-		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: ['current_user'] });
+        mutationFn: () => axiosInstance.post("/auth/logout"),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['current_user'] });
             navigate("/login");
-		},
-	});
+        },
+    });
 
     return (
         <nav className='bg-base-100 shadow-md sticky top-0 z-10'>
@@ -30,13 +30,18 @@ const Navbar = () => {
                         </Link>
                     </div>
                     <div className='flex items-center gap-2 md:gap-6'>
-                        {current_user ? (<button
-                            className='flex items-center space-x-1 text-sm text-gray-600 hover:text-gray-800'
-                            onClick={() => logout()}
-                        >
-                            <LogOut size={20} />
-                            <span className='hidden md:inline'>Logout</span>
-                        </button>) :
+                        {current_user ? (
+                            <div className='flex gap-4'>
+                                <Link className='flex items-center space-x-1 text-sm btn btn-ghost' to={"/profile"}>
+                                    <User size={20} />
+                                    <span className='hidden md:inline'>Profile</span>
+                                </Link>
+                                <button className='flex items-center space-x-1 text-sm btn btn-secondary' onClick={() => logout()}>
+                                    <LogOut size={20} />
+                                    <span className='hidden md:inline'>Logout</span>
+                                </button>
+                            </div>
+                        ) :
                             (<>
                                 <Link to='/login' className='btn btn-ghost'>
                                     Sign In
