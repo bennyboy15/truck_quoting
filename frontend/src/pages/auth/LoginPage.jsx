@@ -2,11 +2,14 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react"
 import { axiosInstance } from "../../lib/axios";
 import toast from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
 
 function LoginPage() {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   const queryClient = useQueryClient();
 
@@ -19,6 +22,7 @@ function LoginPage() {
       queryClient.invalidateQueries({ queryKey: ["current_user"] });
       setUsername("");
       setPassword("");
+      navigate("/");
     },
     onError: (error) => {
       toast.error(error?.response?.data?.message || "Something went wrong");
@@ -97,7 +101,7 @@ function LoginPage() {
               <div className="divider">OR</div>
 
               <div className="flex gap-3">
-                <button className="btn btn-outline w-full">Sign Up</button>
+                <Link to={"/signup"} className="btn btn-outline w-full">Sign Up</Link>
               </div>
             </div>
           </div>

@@ -5,6 +5,7 @@ import Layout from "./components/layout/Layout";
 import { useQuery } from "@tanstack/react-query";
 import toast, { Toaster } from "react-hot-toast";
 import { axiosInstance } from "./lib/axios";
+import SignUpPage from "./pages/auth/SignUpPage";
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
       <Routes>
         <Route path={"/"} element={current_user ? <HomePage /> : <LoginPage />} />
         <Route path={"/login"} element={!current_user ? <LoginPage /> : <HomePage />} />
+        <Route path={"/signup"} element={!current_user ? <SignUpPage /> : <HomePage />} />
       </Routes>
       <Toaster/>
     </Layout>
