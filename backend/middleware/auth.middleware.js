@@ -30,4 +30,14 @@ export async function protectRoute(req,res,next){
         console.log("Error in protectRoute middleware:", error.message);
         return res.status(500).json({message: "Internal server error"})
     }
-}
+};
+
+export const authorize = (...allowedRoles) => {
+    return (req, res, next) => {
+        if (!allowedRoles.includes(req.user.role)) {
+            res.status(403);
+            throw new Error("Forbidden: You do not have access to this resource");
+        }
+        next();
+    };
+};

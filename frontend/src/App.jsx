@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import HomePage from "./pages/HomePage"
 import LoginPage from "./pages/auth/LoginPage"
 import Layout from "./components/layout/Layout";
@@ -30,10 +30,10 @@ function App() {
   return (
     <Layout>
       <Routes>
-        <Route path={"/"} element={current_user ? <HomePage /> : <LoginPage />} />
-        <Route path={"/login"} element={!current_user ? <LoginPage /> : <HomePage />} />
-        <Route path={"/signup"} element={!current_user ? <SignUpPage /> : <HomePage />} />
-        <Route path={"/profile"} element={current_user ? <ProfilePage /> : <LoginPage />} />
+        <Route path={"/"} element={current_user ? <HomePage /> : <Navigate to={"/login"}/>} />
+        <Route path={"/login"} element={!current_user ? <LoginPage /> : <Navigate to={"/"}/>} />
+        <Route path={"/signup"} element={!current_user ? <SignUpPage /> : <Navigate to={"/"}/>} />
+        <Route path={"/profile"} element={current_user ? <ProfilePage /> : <Navigate to={"/login"}/>} />
       </Routes>
       <Toaster/>
     </Layout>

@@ -53,7 +53,7 @@ export default function ProfilePage() {
 
                             {isEditing ?
                                 (
-                                    <div className="flex gap-2">
+                                    <div className="flex gap-2 w-full">
                                         <label className="input flex-2">
                                             <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                                 <g
@@ -104,9 +104,9 @@ export default function ProfilePage() {
                                 </>
                                 ) :
                                 (
-                                    <form onSubmit={handleEdit} className="flex flex-col items-center gap-2">
-                                        <div className="text-sm w-full">
-                                            <label className="input ">
+                                    <form onSubmit={handleEdit} className="flex flex-col items-center gap-2 w-full">
+                                        <div className="text-sm  w-full">
+                                            <label className="input w-full">
                                                 <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                                     <g
                                                         strokeLinejoin="round"
@@ -123,7 +123,7 @@ export default function ProfilePage() {
                                             </label>
                                         </div>
                                         <div className="text-sm w-full">
-                                            <label className="input ">
+                                            <label className="input w-full">
                                                 <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
                                                     <g fill="none">
                                                         <path

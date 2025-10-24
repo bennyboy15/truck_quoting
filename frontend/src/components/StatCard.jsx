@@ -1,7 +1,7 @@
 export default function StatCard({ title, value, icon, bgColor }) {
     const Icon = icon;
     return (
-        <div className={`card bg-${bgColor} text-${bgColor}-content shadow-lg`}>
+        <div className={`card bg-${bgColor} text-${bgColor}-content shadow-lg border border-base-300`}>
             <div className="card-body p-4">
                 <div className="flex items-center justify-between">
                     <div className={`bg-${bgColor} p-3 rounded-box`}>
