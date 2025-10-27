@@ -29,7 +29,7 @@ export default function ProfilePage() {
         onError: (error) => {
             toast.error(error.response.data.message || "Something went wrong when updating profile");
         }
-    })
+    });
 
     function handleEdit(e) {
         e.preventDefault();
