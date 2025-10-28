@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react"
 import { axiosInstance } from "../../lib/axios";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function SignUpPage() {
 
@@ -13,6 +13,8 @@ function SignUpPage() {
     const [password, setPassword] = useState("");
 
     const queryClient = useQueryClient();
+
+    const navigate = useNavigate();
 
     const { mutate: signup, isLoading } = useMutation({
         mutationFn: async (data) => {
@@ -26,6 +28,7 @@ function SignUpPage() {
             setEmail("");
             setPhone("");
             setPassword("");
+            navigate("/");
         },
         onError: (error) => {
             toast.error(error?.response?.data?.message || "Something went wrong");

@@ -8,6 +8,9 @@ import { axiosInstance } from "./lib/axios";
 import SignUpPage from "./pages/auth/SignUpPage";
 import WorksheetsPage from "./pages/worksheets/WorksheetsPage";
 import ProfilePage from "./pages/ProfilePage";
+import CreateWorksheetPage from "./pages/worksheets/CreateWorksheetPage";
+import IndividualWorksheetPage from "./pages/worksheets/IndividualWorksheetPage";
+import TrucksPage from "./pages/trucks/TrucksPage";
 
 function App() {
 
@@ -37,6 +40,11 @@ function App() {
         <Route path={"/profile"} element={current_user ? <ProfilePage /> : <LoginPage />} />
 
         <Route path={"/worksheets"} element={current_user ? <WorksheetsPage /> : <LoginPage />} />
+        <Route path={"/worksheets/:id"} element={current_user ? <IndividualWorksheetPage /> : <LoginPage />} />
+        <Route path={"/worksheets/create"} element={current_user ? <CreateWorksheetPage /> : <LoginPage />} />
+
+        <Route path={"/trucks"} element={current_user ? <TrucksPage /> : <LoginPage />} />
+
       </Routes>
       <Toaster/>
     </Layout>
