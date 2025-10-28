@@ -141,14 +141,14 @@ export default function TruckForm() {
               className="select select-bordered"
             >
               <option value="">{modelsLoading ? "Loading models..." : "Select model"}</option>
-              {modelsData?.map((m) => (
-                <option key={m._id} value={m.name}>{m.name} {m.category ? `(${m.category})` : ""}</option>
+              {modelsData?.map((model) => (
+                <option key={model._id} value={model.name}>{model.name} {model.category ? `(${model.category})` : ""}</option>
               ))}
             </select>
           </div>
 
           <div className="flex gap-2 justify-end">
-            <button type="button" onClick={(e) => clearForm(e)} className="btn btn-ghost">Reset</button>
+            <button type="button" onClick={clearForm} className="btn btn-ghost">Reset</button>
 
             <button type="submit" className={`btn btn-primary ${isLoading ? "loading" : ""}`} disabled={isLoading}>
               {isLoading ? "Creating..." : "Create Truck"}
