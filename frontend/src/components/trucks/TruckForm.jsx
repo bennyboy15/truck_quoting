@@ -20,7 +20,7 @@ export default function TruckForm() {
   });
 
   const { data: modelsData, isLoading: modelsLoading } = useQuery({
-    queryKey: ["truck_models"],
+    queryKey: ["truckModels"],
     queryFn: async () => {
       const res = await axiosInstance.get("/trucks/model");
       console.log("Models data:", res.data);

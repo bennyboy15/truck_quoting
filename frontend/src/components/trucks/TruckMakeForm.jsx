@@ -1,4 +1,4 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react'
 import { axiosInstance } from '../../lib/axios';
 import toast from 'react-hot-toast';
@@ -7,12 +7,15 @@ function TruckMakeForm() {
     const [name, setName] = useState("");
     const [code, setCode] = useState("");
 
+    const queryClient = useQueryClient();
+
     const {mutate: createMake} = useMutation({
         mutationFn: async (data) => {
             return await axiosInstance.post("/trucks/make", data);
         },
         onSuccess: ()=>{
             toast.success("Successfully created new truck make");
+            queryClient.invalidateQueries({queryKey: ["truckMakes"]});
             setName("");
             setCode("");
         }, 
@@ -27,7 +30,7 @@ function TruckMakeForm() {
     }
 
     return (
-        <div className='card bg-base-100 shadow-md border border-base-300'>
+        <div className='card bg-base-100 shadow-md border border-base-300 w-full'>
             <div className="card-body">
                 {/* TITLE */}
                 <h3 className="card-title">Create Truck Make</h3>
