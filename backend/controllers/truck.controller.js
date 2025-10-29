@@ -78,13 +78,7 @@ export async function createTruck(req,res){
             return res.status(400).json({message: "Missing required fields"})
         }
 
-        const selectedModel = await TruckModel.findOne({name: model});
-
-        if (!selectedModel) {
-            return res.status(400).json({message:"Invalid make"});
-        }
-
-        const truck = new Truck({stockNo, chassisNo, fleetNo, registration, offlineDate, deliveryDate, truckColour, chassisColour, trimColour, model:selectedModel._id});
+        const truck = new Truck({stockNo, chassis:chassisNo, fleetNo, registration, offlineDate, deliveryDate, truckColour, chassisColour, trimColour, model});
         await truck.save();
         return res.status(201).json({message: "Successfully created new Truck"});
     } catch (error) {

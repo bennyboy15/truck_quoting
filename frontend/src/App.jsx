@@ -35,6 +35,7 @@ function App() {
   return (
     <Layout>
       <Routes>
+        
         <Route path={"/"} element={current_user ? <HomePage /> : <Navigate to={"/login"}/>} />
         <Route path={"/login"} element={!current_user ? <LoginPage /> : <Navigate to={"/"}/>} />
         <Route path={"/signup"} element={!current_user ? <SignUpPage /> : <Navigate to={"/"}/>} />

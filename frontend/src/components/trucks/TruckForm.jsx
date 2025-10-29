@@ -55,6 +55,7 @@ export default function TruckForm() {
 
   function handleChange(e) {
     const { name, value } = e.target;
+    console.log(name, value);
     setForm((s) => ({ ...s, [name]: value }));
   }
 
@@ -142,7 +143,7 @@ export default function TruckForm() {
             >
               <option value="">{modelsLoading ? "Loading models..." : "Select model"}</option>
               {modelsData?.map((model) => (
-                <option key={model._id} value={model.name}>{model.name} {model.category ? `(${model.category})` : ""}</option>
+                <option key={model._id} value={model._id}>{model.name} {model.category ? `(${model.category})` : ""}</option>
               ))}
             </select>
           </div>

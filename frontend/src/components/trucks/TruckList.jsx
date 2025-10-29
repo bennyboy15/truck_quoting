@@ -56,7 +56,7 @@ function TruckList() {
                                 {truck.stockNo} {truck.chassisNo}
                                 <br />
                             </td>
-                            <td>{truck.model.name}</td>
+                            <td>{truck.model?.name || "N/A"}</td>
                             <th>
                                 <button className="btn btn-primary-content btn-xs">View</button>
                             </th>

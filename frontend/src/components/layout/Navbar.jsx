@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { LogOut, PencilRuler, Truck, User, } from "lucide-react";
+import { LogOut, PencilRuler, Settings, Truck, User, } from "lucide-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { axiosInstance } from "../../lib/axios";
 import { useCurrentUser } from "../../hooks/useCurrentUser";
@@ -37,6 +37,10 @@ const Navbar = () => {
                         <Link className='flex items-center space-x-1 text-sm btn btn-ghost' to={"/trucks"}>
                             <Truck size={20} />
                             <span className='hidden md:inline'>Trucks</span>
+                        </Link>
+                        <Link className='flex items-center space-x-1 text-sm btn btn-ghost' to={"/admin"}>
+                            <Settings size={20} />
+                            <span className='hidden md:inline'>Admin</span>
                         </Link>
                     </div>
                     <div className='flex items-center gap-2 md:gap-6'>
