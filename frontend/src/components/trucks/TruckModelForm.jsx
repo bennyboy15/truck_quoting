@@ -42,10 +42,8 @@ function TruckMakeForm() {
     }
 
     return (
-        <div className='card bg-base-100 shadow-md border border-base-300 w-full'>
+        <div className='card bg-base-100 w-full'>
             <div className="card-body">
-                {/* TITLE */}
-                <h3 className="card-title">Create Model</h3>
                 <form onSubmit={handleSubmit} className="space-y-4">
 
                     {/* NAME */}
@@ -69,7 +67,7 @@ function TruckMakeForm() {
                         <div className="form-control">
                             <label className="label"><span className="label-text">Make</span></label>
                             <fieldset className="fieldset">
-                                <select defaultValue="Pick a browser" className="select border border-base-300" onChange={(e) => setMake(e.target.value)}>
+                                <select defaultValue="Pick a browser" className="select border-2 border-base-500" onChange={(e) => setMake(e.target.value)}>
                                     <option disabled={true}>Pick a make</option>
                                     {truckMakes?.map((make) => (
                                         <option key={make._id}>{make.name}</option>

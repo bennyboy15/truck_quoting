@@ -81,10 +81,9 @@ export default function TruckForm() {
   }
 
   return (
-    <div className="card bg-base-100 shadow-md border border-base-300">
+    <div className="card bg-base-100">
       <div className="card-body">
-        <h3 className="card-title">Create Truck</h3>
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="form-control">
               <label className="label"><span className="label-text">Stock No</span></label>

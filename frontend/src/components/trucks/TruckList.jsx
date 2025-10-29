@@ -14,6 +14,7 @@ function TruckList() {
 
     return (
         <div className="overflow-x-auto border border-base-300 rounded shadow-2xl">
+
             <table className="table">
                 {/* head */}
                 <thead>

@@ -30,10 +30,8 @@ function TruckMakeForm() {
     }
 
     return (
-        <div className='card bg-base-100 shadow-md border border-base-300 w-full'>
+        <div className='card bg-base-100 w-full'>
             <div className="card-body">
-                {/* TITLE */}
-                <h3 className="card-title">Create Truck Make</h3>
                 <form onSubmit={handleSubmit} className="space-y-4">
 
                     {/* NAME */}
