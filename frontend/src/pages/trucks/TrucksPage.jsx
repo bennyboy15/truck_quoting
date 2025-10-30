@@ -5,12 +5,9 @@ import TruckModelForm from "../../components/trucks/TruckModelForm"
 import Modal from "../../components/Modal"
 import TruckModelList from "../../components/trucks/TruckModelList"
 import TruckMakeList from "../../components/trucks/TruckMakeList"
+import { closeModal } from "../../lib/utils"
 
 function TrucksPage() {
-
-  function closeModal(id) {
-    document.getElementById(id).showModal();
-  }
 
   return (
     <>

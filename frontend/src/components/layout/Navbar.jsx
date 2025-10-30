@@ -103,9 +103,13 @@ const Navbar = () => {
             <div className="navbar-end">
                 {current_user ? (
                     <div className='flex gap-4'>
-                        <Link className='flex items-center space-x-1 text-sm btn btn-ghost' to={"/profile"}>
-                            <User size={20} />
-                            <span className='hidden md:inline'>Profile</span>
+                        <Link className='flex items-center space-x-1 text-sm btn h-full' to={"/profile"}>
+                            <div className="avatar avatar-online">
+                                <div className="w-10 rounded-full">
+                                    <img src={current_user.profilePicture || "/avatar.png"} />
+                                </div>
+                            </div>
+                            <span className='hidden md:inline font-semibold'>{current_user.name}</span>
                         </Link>
                         <button className='flex items-center space-x-1 text-sm btn btn-secondary' onClick={() => logout()}>
                             <LogOut size={20} />
