@@ -14,7 +14,7 @@ export async function getMakes(req,res){
 
 export async function getModels(req,res){
     try {
-        const truckModels = await TruckModel.find({});
+        const truckModels = await TruckModel.find().populate("make");
         return res.status(200).json(truckModels);
     } catch (error) {
         console.log("Error in getModels truck controller", error);

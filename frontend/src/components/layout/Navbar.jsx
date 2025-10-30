@@ -38,7 +38,7 @@ const Navbar = () => {
                             <Truck size={20} />
                             <span className='hidden md:inline'>Trucks</span>
                         </Link>
-                        <Link className='flex items-center space-x-1 text-sm btn btn-ghost' to={"/admin"}>
+                        <Link className={`flex items-center space-x-1 text-sm btn btn-ghost ${current_user?.role !== "admin" ? "opacity-50 pointer-events-none" : ""}`} to={"/admin"}>
                             <Settings size={20} />
                             <span className='hidden md:inline'>Admin</span>
                         </Link>

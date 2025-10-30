@@ -38,7 +38,7 @@ function TruckMakeForm() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="form-control">
                             <label className="label"><span className="label-text">Name</span></label>
-                            <input name="name" value={name} onChange={(e) => setName(e.target.value)} required className="input input-bordered" />
+                            <input name="name" value={name} onChange={(e) => setName(e.target.value)} required className="input input-bordered bg-white" />
                         </div>
                     </div>
 
@@ -46,7 +46,7 @@ function TruckMakeForm() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="form-control">
                             <label className="label"><span className="label-text">Code</span></label>
-                            <input name="code" value={code} onChange={(e) => setCode(e.target.value)} required className="input input-bordered" />
+                            <input name="code" value={code} onChange={(e) => setCode(e.target.value)} required className="input input-bordered bg-white" />
                         </div>
                     </div>
 

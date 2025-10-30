@@ -83,36 +83,36 @@ export default function TruckForm() {
   return (
     <div className="card bg-base-100">
       <div className="card-body">
-        <form onSubmit={handleSubmit} className="">
+        <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="form-control">
               <label className="label"><span className="label-text">Stock No</span></label>
-              <input name="stockNo" value={form.stockNo} onChange={handleChange} required className="input input-bordered" />
+              <input name="stockNo" value={form.stockNo} onChange={handleChange} required className="input input-bordered bg-white w-full" />
             </div>
 
             <div className="form-control">
               <label className="label"><span className="label-text">Chassis No</span></label>
-              <input name="chassisNo" value={form.chassisNo} onChange={handleChange} required className="input input-bordered" />
+              <input name="chassisNo" value={form.chassisNo} onChange={handleChange} required className="input input-bordered bg-white w-full" />
             </div>
 
             <div className="form-control">
               <label className="label"><span className="label-text">Fleet No</span></label>
-              <input name="fleetNo" value={form.fleetNo} onChange={handleChange} className="input input-bordered" />
+              <input name="fleetNo" value={form.fleetNo} onChange={handleChange} className="input input-bordered bg-white w-full" />
             </div>
 
             <div className="form-control">
               <label className="label"><span className="label-text">Registration</span></label>
-              <input name="registration" value={form.registration} onChange={handleChange} className="input input-bordered" />
+              <input name="registration" value={form.registration} onChange={handleChange} className="input input-bordered bg-white w-full" />
             </div>
 
             <div className="form-control">
               <label className="label"><span className="label-text">Offline Date</span></label>
-              <input name="offlineDate" value={form.offlineDate} onChange={handleChange} type="date" className="input input-bordered" />
+              <input name="offlineDate" value={form.offlineDate} onChange={handleChange} type="date" className="input input-bordered bg-white w-full" />
             </div>
 
             <div className="form-control">
               <label className="label"><span className="label-text">Delivery Date</span></label>
-              <input name="deliveryDate" value={form.deliveryDate} onChange={handleChange} type="date" className="input input-bordered" />
+              <input name="deliveryDate" value={form.deliveryDate} onChange={handleChange} type="date" className="input input-bordered bg-white w-full" />
             </div>
           </div>
 
@@ -138,7 +138,7 @@ export default function TruckForm() {
               value={form.model}
               onChange={handleChange}
               required
-              className="select select-bordered"
+              className="select select-bordered w-full bg-white"
             >
               <option value="">{modelsLoading ? "Loading models..." : "Select model"}</option>
               {modelsData?.map((model) => (
@@ -147,7 +147,7 @@ export default function TruckForm() {
             </select>
           </div>
 
-          <div className="flex gap-2 justify-end">
+          <div className="flex gap-2 justify-end mt-5">
             <button type="button" onClick={clearForm} className="btn btn-ghost">Reset</button>
 
             <button type="submit" className={`btn btn-primary ${isLoading ? "loading" : ""}`} disabled={isLoading}>

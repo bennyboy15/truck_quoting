@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import React from 'react'
 import { axiosInstance } from '../../lib/axios'
+import Status from '../Status'
 
 function TruckList() {
 
@@ -13,17 +14,13 @@ function TruckList() {
     })
 
     return (
-        <div className="overflow-x-auto border border-base-300 rounded shadow-2xl">
+        <div className="overflow-x-auto border border-base-300 rounded shadow-lg transition-transform duration-300 ease-in-out hover:scale-101">
 
             <table className="table">
                 {/* head */}
                 <thead>
                     <tr>
-                        <th>
-                            <label>
-                                <input type="checkbox" className="checkbox" />
-                            </label>
-                        </th>
+                        <th>Status</th>
                         <th>Customer</th>
                         <th>Stock/Chassis</th>
                         <th>Model</th>
@@ -32,10 +29,10 @@ function TruckList() {
                 </thead>
                 <tbody>
                     {trucks?.map((truck) => (
-                        <tr key={truck._id}>
+                        <tr key={truck._id} className='transition-transform duration-300 ease-in-out hover:scale-99'>
                             <th>
                                 <label>
-                                    <input type="checkbox" className="checkbox" />
+                                    <Status status={truck.status}/>
                                 </label>
                             </th>
                             <td>
@@ -43,13 +40,13 @@ function TruckList() {
                                     <div className="avatar">
                                         <div className="w-15 h-10 rounded-box">
                                             <img
-                                                src="/t410sar.png"
+                                                src="/t410sar.jpg"
                                                 alt="Avatar Tailwind CSS Component" />
                                         </div>
                                     </div>
                                     <div>
                                         <div className="font-bold">Customer Name</div>
-                                        <div className="text-sm opacity-50">{truck.stockNo} {truck.chassisNo}</div>
+                                        <div className="text-sm opacity-50">{truck.stockNo} {truck.chassis}</div>
                                     </div>
                                 </div>
                             </td>
@@ -58,7 +55,7 @@ function TruckList() {
                                 <br />
                             </td>
                             <td>{truck.model?.name || "N/A"}</td>
-                            <th>
+                            <th className='flex justify-end'>
                                 <button className="btn btn-primary-content btn-xs">View</button>
                             </th>
                         </tr>

@@ -11,7 +11,7 @@ export default function WorksheetList(){
 
             <li className="list-row">
                 <div className="text-4xl font-thin opacity-30 tabular-nums">01</div>
-                <div><img className="w-15 h-10 rounded-box" src="/t410sar.png" /></div>
+                <div><img className="w-15 h-10 rounded-box" src="/t410sar.jpg" /></div>
                 <div className="list-col-grow">
                     <div>Collins</div>
                     <div className="text-xs uppercase font-semibold opacity-60">LA6875 476859</div>
@@ -23,7 +23,7 @@ export default function WorksheetList(){
 
             <li className="list-row">
                 <div className="text-4xl font-thin opacity-30 tabular-nums">02</div>
-                <div><img className="w-15 h-10 rounded-box" src="/t410sar.png" /></div>
+                <div><img className="w-15 h-10 rounded-box" src="/t410sar.jpg" /></div>
                 <div className="list-col-grow">
                     <div>APC Transport</div>
                     <div className="text-xs uppercase font-semibold opacity-60">LF8657 478675</div>
@@ -35,7 +35,7 @@ export default function WorksheetList(){
 
             <li className="list-row">
                 <div className="text-4xl font-thin opacity-30 tabular-nums">03</div>
-                <div><img className="w-15 h-10 rounded-box" src="/t410sar.png" /></div>
+                <div><img className="w-15 h-10 rounded-box" src="/t410sar.jpg" /></div>
                 <div className="list-col-grow">
                     <div>Collins</div>
                     <div className="text-xs uppercase font-semibold opacity-60">LF96885 478867</div>

@@ -50,7 +50,7 @@ function TruckMakeForm() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="form-control">
                             <label className="label"><span className="label-text">Name</span></label>
-                            <input name="name" value={name} onChange={(e) => setName(e.target.value)} required className="input input-bordered" />
+                            <input name="name" value={name} onChange={(e) => setName(e.target.value)} required className="input input-bordered w-full bg-white" />
                         </div>
                     </div>
 
@@ -58,24 +58,26 @@ function TruckMakeForm() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="form-control">
                             <label className="label"><span className="label-text">Category</span></label>
-                            <input name="code" value={category} onChange={(e) => setCategory(e.target.value)} required className="input input-bordered" />
+                            <input name="code" value={category} onChange={(e) => setCategory(e.target.value)} required className="input input-bordered w-full bg-white" />
                         </div>
                     </div>
+
 
                     {/* MAKE */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="form-control">
                             <label className="label"><span className="label-text">Make</span></label>
                             <fieldset className="fieldset">
-                                <select defaultValue="Pick a browser" className="select border-2 border-base-500" onChange={(e) => setMake(e.target.value)}>
-                                    <option disabled={true}>Pick a make</option>
-                                    {truckMakes?.map((make) => (
-                                        <option key={make._id}>{make.name}</option>
+                                <select value={make} className="select border-2 border-base-500 w-full bg-white" onChange={(e) => setMake(e.target.value)}>
+                                    <option value="" disabled>Pick a make</option>
+                                    {truckMakes?.map((m) => (
+                                        <option key={m._id} value={m.name}>{m.name}</option>
                                     ))}
                                 </select>
                             </fieldset>
                         </div>
                     </div>
+
 
                     <button className='btn btn-primary' onClick={handleSubmit}>Submit</button>
                 </form>
