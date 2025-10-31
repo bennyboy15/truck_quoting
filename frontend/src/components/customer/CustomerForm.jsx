@@ -41,7 +41,7 @@ export default function TruckForm() {
     }
 
     function clearForm(e) {
-        e.preventDefault();
+        if (e) e.preventDefault(); // make this conditional so when it is called from mutation onSuccess it does not pass an event
         setForm({
             name: "",
             code: "",
@@ -77,8 +77,8 @@ export default function TruckForm() {
                         </div>
 
                         <div className="form-control">
-                            <label className="label"><span className="label-text">Email</span></label>
-                            <input name="email" value={form.email} onChange={handleChange} type="date" className="input input-bordered bg-white w-full" />
+                            <label className="label"><span className="label-text">Address</span></label>
+                            <input name="address" value={form.address} onChange={handleChange} className="input input-bordered bg-white w-full" />
                         </div>
 
                     </div>
