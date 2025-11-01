@@ -166,13 +166,13 @@ export default function ProfilePage() {
             <div className="md:col-span-2 space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     {/* Total Trucks Card */}
-                    <StatCard title="Total Trucks" value={25} icon={Truck} bgColor={"primary"} />
+                    <StatCard title="Total Trucks" value={25} icon={Truck} iconBg={"red"} />
 
                     {/* Revenue Card */}
-                    <StatCard title="Revenue" value={"$15k"} icon={DollarSign} bgColor={"secondary"} />
+                    <StatCard title="Revenue" value={"$15k"} icon={DollarSign} iconBg={"secondary"} />
 
                     {/* Active Quotes Card */}
-                    <StatCard title="Active Quotes" value={12} icon={Calendar} bgColor={"accent"} />
+                    <StatCard title="Active Quotes" value={12} icon={Calendar} iconBg={"accent"} />
                 </div>
 
                 {/* Additional Stats Section */}

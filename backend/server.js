@@ -6,6 +6,7 @@ import authRoutes from "./routes/auth.route.js";
 import userRoutes from "./routes/user.route.js";
 import truckRoutes from "./routes/truck.route.js";
 import customerRoutes from "./routes/customer.route.js";
+import worksheetRoutes from "./routes/worksheet.route.js"
 import { connectDB } from "./lib/db.js";
 import morgan from "morgan";
 
@@ -28,6 +29,7 @@ app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/trucks", truckRoutes);
 app.use("/api/v1/customer", customerRoutes);
+app.use("/api/v1/worksheet", worksheetRoutes);
 
 app.listen(PORT, ()=> {
     console.log("Server running @ Port " + PORT);

@@ -3,25 +3,23 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { axiosInstance } from "../../lib/axios.js";
 import toast from "react-hot-toast";
 
-export default function TruckForm() {
+export default function SectionForm() {
 
     const queryClient = useQueryClient();
 
     const [form, setForm] = useState({
         name: "",
-        code: "",
-        email: "",
-        phone: "",
-        address: "",
+        section_id: "",
+        description: ""
     });
 
-    const {mutate: createCustomer, isPending} = useMutation({
+    const { mutate: createSection, isPending } = useMutation({
         mutationFn: async (data) => {
-            await axiosInstance.post("/customer", data)
+            await axiosInstance.post("/worksheet/section", data)
         },
         onSuccess: () => {
-            toast.success("Created new customer");
-            queryClient.invalidateQueries({queryKey: ["customers"]});
+            toast.success("Created new section");
+            queryClient.invalidateQueries({ queryKey: ["sections"] });
             clearForm();
         },
         onError: (error) => {
@@ -36,17 +34,15 @@ export default function TruckForm() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        createCustomer(form);
+        createSection(form);
     }
 
     function clearForm(e) {
         if (e) e.preventDefault(); // make this conditional so when it is called from mutation onSuccess it does not pass an event
         setForm({
             name: "",
-            code: "",
-            email: "",
-            phone: "",
-            address: "",
+            section_id: "",
+            description: ""
         })
     }
 
@@ -61,23 +57,13 @@ export default function TruckForm() {
                         </div>
 
                         <div className="form-control">
-                            <label className="label"><span className="label-text">Code</span></label>
-                            <input name="code" value={form.code} onChange={handleChange} required className="input input-bordered bg-white w-full" />
+                            <label className="label"><span className="label-text">Section ID</span></label>
+                            <input name="section_id" value={form.section_id} onChange={handleChange} required className="input input-bordered bg-white w-full" type="number"/>
                         </div>
 
                         <div className="form-control">
-                            <label className="label"><span className="label-text">Email</span></label>
-                            <input name="email" value={form.email} onChange={handleChange} className="input input-bordered bg-white w-full" type="email"/>
-                        </div>
-
-                        <div className="form-control">
-                            <label className="label"><span className="label-text">Phone</span></label>
-                            <input name="phone" value={form.phone} onChange={handleChange} className="input input-bordered bg-white w-full"/>
-                        </div>
-
-                        <div className="form-control">
-                            <label className="label"><span className="label-text">Address</span></label>
-                            <input name="address" value={form.address} onChange={handleChange} className="input input-bordered bg-white w-full" />
+                            <label className="label"><span className="label-text">Description</span></label>
+                            <input name="description" value={form.description} onChange={handleChange} className="input input-bordered bg-white w-full" />
                         </div>
 
                     </div>
@@ -86,7 +72,7 @@ export default function TruckForm() {
                         <button type="button" onClick={clearForm} className="btn btn-ghost">Reset</button>
 
                         <button type="submit" className={`btn btn-primary ${isPending ? "loading" : ""}`} disabled={isPending}>
-                            {isPending ? "Creating..." : "Create Customer"}
+                            {isPending ? "Creating..." : "Create Section"}
                         </button>
                     </div>
                 </form>
