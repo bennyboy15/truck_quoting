@@ -20,3 +20,15 @@ export async function updateProfile(req,res){
         res.status(500).json({success:false, message: "Internal Server Error"});
     }
 }
+
+export async function getTechnicians(req, res) {
+    try {
+        const technicians = await User.find({ role: 'technician' })
+            .select('name email phone')
+            .lean();
+        res.json(technicians);
+    } catch (error) {
+        console.log("Error in getTechnicians user controller:", error.message);
+        res.status(500).json({success:false, message: "Internal Server Error"});
+    }
+}

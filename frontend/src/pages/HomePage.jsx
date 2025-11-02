@@ -4,6 +4,7 @@ import { Truck } from 'lucide-react';
 import TruckCard from "../components/trucks/TruckCard.jsx"
 import { useQuery } from '@tanstack/react-query';
 import { axiosInstance } from '../lib/axios.js';
+import { Link } from 'react-router-dom';
 
 function HomePage() {
   const { data: current_user } = useCurrentUser()
@@ -24,7 +25,7 @@ function HomePage() {
           <h1 className='font-bold text-4xl'>Worksheets</h1>
           <h3 className='text-sm text-gray-600'>Manage truck worksheets</h3>
         </div>
-        <button className='btn btn-ghost btn-soft'>+ New Worksheet</button>
+        <Link to={"/worksheets/create"} className='btn btn-ghost btn-soft'>+ New Worksheet</Link>
       </div>
 
       {/* Stat Cards */}
@@ -35,9 +36,9 @@ function HomePage() {
         <StatCard title="Completed" value={25} icon={Truck} iconBg={"bg-green-50"} stripeColor={"bg-green-600"} iconColor={'text-green-700'}/>
       </div>
 
-      <div className='grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>  
-        {trucks.map((truck) => (
-          <TruckCard truck={truck}/>
+      <div className='grid sm:grid-cols-1 md:grid-cols-2 gap-4'>  
+        {trucks?.map((truck) => (
+          <TruckCard truck={truck} key={truck._id}/>
         ))}
       </div>
 

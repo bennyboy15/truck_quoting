@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Home, LogOut, PencilRuler, Settings, Truck, User, } from "lucide-react";
+import { Calendar, Home, LogOut, PencilRuler, Settings, Truck, User, } from "lucide-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { axiosInstance } from "../../lib/axios";
 import { useCurrentUser } from "../../hooks/useCurrentUser";
@@ -55,6 +55,12 @@ const Navbar = () => {
                             </Link>
                         </li>
                         <li>
+                            <Link className='flex items-center space-x-1 text-sm btn btn-ghost' to={"/schedule"}>
+                                <Calendar size={20} />
+                                <span className='hidden md:inline'>Schedule</span>
+                            </Link>
+                        </li>
+                        <li>
                             <Link className={`flex items-center space-x-1 text-sm btn btn-ghost ${current_user?.role !== "admin" ? "opacity-50 pointer-events-none" : ""}`} to={"/admin"}>
                                 <Settings size={20} />
                                 <span className='hidden md:inline'>Admin</span>
@@ -62,7 +68,7 @@ const Navbar = () => {
                         </li>
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">Project O</a>
+                <a className="font-semibold text-xl">Project O</a>
             </div>
 
             {/* FULL SIZE */}
@@ -90,6 +96,12 @@ const Navbar = () => {
                         <Link className='flex items-center space-x-1 text-sm btn btn-ghost' to={"/trucks"}>
                             <Truck size={20} />
                             <span className='hidden md:inline'>Trucks</span>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link className='flex items-center space-x-1 text-sm btn btn-ghost' to={"/schedule"}>
+                            <Calendar size={20} />
+                            <span className='hidden md:inline'>Schedule</span>
                         </Link>
                     </li>
                     <li>

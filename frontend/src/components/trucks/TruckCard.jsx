@@ -40,7 +40,7 @@ export default function TruckCard({ truck = {} }) {
   })()
 
   return (
-    <article className="bg-white rounded-lg shadow-sm border border-base-300 p-4 flex gap-4 items-start">
+    <article className="bg-white rounded-lg shadow-sm border border-base-300 p-4 flex gap-4 items-start w-full">
       <div className="flex-shrink-0 rounded-md bg-slate-50 p-3">
         <Truck className="w-6 h-6 text-slate-700" />
       </div>

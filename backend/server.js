@@ -6,7 +6,7 @@ import authRoutes from "./routes/auth.route.js";
 import userRoutes from "./routes/user.route.js";
 import truckRoutes from "./routes/truck.route.js";
 import customerRoutes from "./routes/customer.route.js";
-import worksheetRoutes from "./routes/worksheet.route.js"
+import worksheetRoutes from "./routes/worksheet.route.js";
 import { connectDB } from "./lib/db.js";
 import morgan from "morgan";
 

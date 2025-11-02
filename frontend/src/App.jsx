@@ -11,6 +11,7 @@ import ProfilePage from "./pages/ProfilePage";
 import CreateWorksheetPage from "./pages/worksheets/CreateWorksheetPage";
 import IndividualWorksheetPage from "./pages/worksheets/IndividualWorksheetPage";
 import TrucksPage from "./pages/trucks/TrucksPage";
+import SchedulePage from "./pages/schedule/SchedulePage.jsx"
 import AdminPage from "./pages/admin/AdminPage";
 
 function App() {
@@ -62,6 +63,8 @@ function App() {
         <Route path={"/worksheets/create"} element={current_user ? <CreateWorksheetPage /> : <Navigate to={"/login"} />} />
 
         <Route path={"/trucks"} element={current_user ? <TrucksPage /> : <Navigate to={"/login"} />} />
+
+        <Route path={"/schedule"} element={current_user ? <SchedulePage /> : <Navigate to={"/login"} />} />
 
         <Route path={"/admin"} element={
           <ProtectedRoute user={current_user} requiredRole="admin">

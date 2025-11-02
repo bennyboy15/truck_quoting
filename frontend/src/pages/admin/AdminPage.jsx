@@ -3,6 +3,7 @@ import { closeModal } from '../../lib/utils.js';
 import Modal from '../../components/Modal.jsx';
 import CustomerList from "../../components/customer/CustomerList.jsx"
 import SectionForm from "../../components/worksheets/SectionForm.jsx"
+import SectionList from "../../components/worksheets/SectionList.jsx";
 
 function AdminPage() {
 
@@ -21,6 +22,8 @@ function AdminPage() {
       <Modal closeModal={closeModal} id="my_modal_section" title="Create Section">
         <SectionForm />
       </Modal>
+
+      <SectionList/>
 
     </div>
   )

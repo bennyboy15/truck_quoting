@@ -40,7 +40,7 @@ export default function ProfilePage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Profile Card */}
             <div className="md:col-span-1">
-                <div className="card bg-base-100 shadow-lg border border-base-300">
+                <div className="card bg-white shadow-lg border border-base-300">
                     <figure className="px-4 pt-4">
                         <img
                             src={current_user.profilePicture || "/avatar.png"}
@@ -166,17 +166,15 @@ export default function ProfilePage() {
             <div className="md:col-span-2 space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     {/* Total Trucks Card */}
-                    <StatCard title="Total Trucks" value={25} icon={Truck} iconBg={"red"} />
-
+                    <StatCard title="Total Trucks" value={25} icon={Truck} iconBg={"bg-blue-50"} stripeColor={"bg-blue-600"} iconColor={'text-blue-700'}/>
                     {/* Revenue Card */}
-                    <StatCard title="Revenue" value={"$15k"} icon={DollarSign} iconBg={"secondary"} />
-
+                    <StatCard title="Revenue" value={"$15k"} icon={DollarSign} iconBg={"bg-orange-50"} stripeColor={"bg-orange-600"} iconColor={'text-orange-700'}/>
                     {/* Active Quotes Card */}
-                    <StatCard title="Active Quotes" value={12} icon={Calendar} iconBg={"accent"} />
+                    <StatCard title="Active Quotes" value={12} icon={Calendar} iconBg={"bg-purple-50"} stripeColor={"bg-purple-600"} iconColor={'text-purple-700'}/>
                 </div>
 
                 {/* Additional Stats Section */}
-                <div className="card bg-base-100 shadow-lg border border-base-300">
+                <div className="card bg-white shadow-lg border border-base-300">
                     <div className="card-body">
                         <h3 className="card-title">Recent Activity</h3>
                         <div className="text-base-content/60 text-center py-8">
