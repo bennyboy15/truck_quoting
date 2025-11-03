@@ -14,7 +14,7 @@ function TruckList() {
     })
 
     return (
-        <div className="overflow-x-auto border border-base-300 rounded shadow-lg transition-transform duration-300 ease-in-out hover:scale-101">
+        <div className="bg-white overflow-x-auto border border-base-300 rounded-xl shadow-lg transition-transform duration-300 ease-in-out hover:scale-101">
 
             <table className="table">
                 {/* head */}

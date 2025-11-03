@@ -29,11 +29,11 @@ export default function TruckCard({ truck = {} }) {
     // map numeric status to label + tailwind classes
     switch (Number(status)) {
       case 1:
-        return { label: 'Active', classes: 'bg-emerald-100 text-emerald-800' }
+        return { label: 'Completed', classes: 'bg-emerald-100 text-emerald-800' }
       case 2:
-        return { label: 'Offline', classes: 'bg-amber-100 text-amber-800' }
+        return { label: 'Awaiting', classes: 'bg-amber-100 text-amber-800' }
       case 3:
-        return { label: 'Decommissioned', classes: 'bg-red-100 text-red-800' }
+        return { label: 'Active', classes: 'bg-blue-100 text-blue-800' }
       default:
         return { label: 'Unknown', classes: 'bg-slate-100 text-slate-800' }
     }
@@ -41,7 +41,7 @@ export default function TruckCard({ truck = {} }) {
 
   return (
     <article className="bg-white rounded-lg shadow-sm border border-base-300 p-4 flex gap-4 items-start w-full">
-      <div className="flex-shrink-0 rounded-md bg-slate-50 p-3">
+      <div className="shrink-0 rounded-md bg-slate-50 p-3">
         <Truck className="w-6 h-6 text-slate-700" />
       </div>
 
@@ -115,7 +115,7 @@ export default function TruckCard({ truck = {} }) {
           <div className="flex items-center gap-2">
             <Link
               to={`/truck/${_id}`}
-              className="btn btn-sm btn-outline"
+              className="btn btn-sm btn-ghost"
               aria-label={`View details for ${stockNo ?? 'truck'}`}
             >
               View details

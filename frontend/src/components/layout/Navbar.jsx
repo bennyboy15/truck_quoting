@@ -21,7 +21,7 @@ const Navbar = () => {
     });
 
     return (
-        <div className="navbar bg-base-100 shadow-sm">
+        <div className="navbar bg-white shadow-sm">
             <div className="navbar-start">
                 <div className="dropdown">
 
@@ -31,7 +31,7 @@ const Navbar = () => {
                     </div>
                     <ul
                         tabIndex="-1"
-                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                        className="menu menu-sm dropdown-content rounded-box mt-3 w-52 p-2 shadow bg-white border border-base-300 z-999">
                         <li>
                             <Link className='flex items-center space-x-1 text-sm btn btn-ghost' to={"/"}>
                                 <Home size={20} />
@@ -86,7 +86,7 @@ const Navbar = () => {
                                 <PencilRuler size={20} />
                                 <span className='hidden md:inline'>Worksheets</span>
                             </summary>
-                            <ul className="p-2">
+                            <ul className="p-2 bg-white border border-base-300 z-998">
                                 <li><Link to={"/worksheets"}>View Worksheets</Link></li>
                                 <li><Link to={"/worksheets/create"}>Create Worksheet</Link></li>
                             </ul>

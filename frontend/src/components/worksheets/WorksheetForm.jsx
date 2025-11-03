@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { axiosInstance } from '../../lib/axios';
 
 function WorksheetForm() {
@@ -28,9 +28,6 @@ function WorksheetForm() {
         setCurrentSection((c) => Math.max(c - 1, 0));
     }
 
-    function handleSelect(id, value) {
-        setAnswers((p) => ({ ...p, [id]: value }))
-    }
 
     function handleSubmit(e) {
         e.preventDefault()

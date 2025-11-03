@@ -10,7 +10,7 @@ function AdminPage() {
   return (
     <div className="flex flex-col gap-5">
       {/* Customer Create Modal */}
-      <button className="btn btn-outline" onClick={() => closeModal('my_modal_customer')}>Create Customer +</button>
+      <button className="btn btn-soft" onClick={() => closeModal('my_modal_customer')}>Create Customer +</button>
       <Modal closeModal={closeModal} id="my_modal_customer" title="Create Customer">
         <CustomerForm />
       </Modal>
@@ -18,7 +18,7 @@ function AdminPage() {
       <CustomerList/>
 
       {/* Section Create Modal */}
-      <button className="btn btn-outline" onClick={() => closeModal('my_modal_section')}>Create Section +</button>
+      <button className="btn btn-soft" onClick={() => closeModal('my_modal_section')}>Create Section +</button>
       <Modal closeModal={closeModal} id="my_modal_section" title="Create Section">
         <SectionForm />
       </Modal>

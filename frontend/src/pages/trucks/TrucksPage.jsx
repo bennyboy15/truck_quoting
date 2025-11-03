@@ -14,19 +14,19 @@ function TrucksPage() {
       <div className="flex gap-5 mb-2">
 
         {/* Truck Create Modal */}
-        <button className="btn btn-outline" onClick={() => closeModal('my_modal_truck')}>Create Truck +</button>
+        <button className="btn btn-soft" onClick={() => closeModal('my_modal_truck')}>Create Truck +</button>
         <Modal closeModal={closeModal} id="my_modal_truck" title="Create Truck">
           <TruckForm />
         </Modal>
 
         {/* Make Create Modal */}
-        <button className="btn btn-outline" onClick={() => closeModal('my_modal_make')}>Create Make +</button>
+        <button className="btn btn-soft" onClick={() => closeModal('my_modal_make')}>Create Make +</button>
         <Modal closeModal={closeModal} id="my_modal_make" title="Create Make">
           <TruckMakeForm />
         </Modal>
 
         {/* Model Create Modal */}
-        <button className="btn btn-outline" onClick={() => closeModal('my_modal_model')}>Create Model +</button>
+        <button className="btn btn-soft" onClick={() => closeModal('my_modal_model')}>Create Model +</button>
         <Modal closeModal={closeModal} id="my_modal_model" title="Create Model">
           <TruckModelForm />
         </Modal>

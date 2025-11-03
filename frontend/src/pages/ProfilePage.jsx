@@ -75,7 +75,7 @@ export default function ProfilePage() {
                                                 onChange={(e) => setName(e.target.value)}
                                             />
                                         </label>
-                                        <button className="btn btn-error btn-sm h-10" onClick={() => setIsEditing(false)}>
+                                        <button className="btn btn-error text-white btn-sm h-10" onClick={() => setIsEditing(false)}>
                                             <CircleX size={18} /> Cancel
                                         </button>
                                     </div>
@@ -152,7 +152,7 @@ export default function ProfilePage() {
                                                 />
                                             </label>
                                         </div>
-                                        <button className="btn btn-success w-full">Save</button>
+                                        <button className="btn btn-success w-full text-white">Save</button>
                                     </form>
                                 )
                             }
