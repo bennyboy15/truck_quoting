@@ -1,9 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { axiosInstance } from '../../lib/axios';
+
+const headings = [
+  { id: 1, section_id: 1, name: "Freight", desc: "How the truck will be delivered to the workshop" },
+  { id: 2, section_id: 1, name: "Pre-Delivery", desc: "" },
+  { id: 3, section_id: 1, name: "Fire-Extinguisher", desc: "" },
+]
 
 function WorksheetForm() {
     const [currentSection, setCurrentSection] = useState(0);
+    const [currentHeadings, setCurrentHeadings] = useState([]);
     const [answers, setAnswers] = useState({});
 
     const {data: sections} = useQuery({
@@ -21,13 +28,26 @@ function WorksheetForm() {
             // clamp to last available index
             if (total === 0) return 0
             return Math.min(c + 1, Math.max(total - 1, 0))
-        })
+        });
     }
 
     function goPrev(){
         setCurrentSection((c) => Math.max(c - 1, 0));
     }
 
+    function goToStep(index){
+        setCurrentSection(index);
+    }
+
+    // Use useEffect to handle heading updates when currentSection changes
+    useEffect(() => {
+        if (sections && sections[currentSection]) {
+            const filteredHeadings = headings.filter(
+                (heading) => heading.section_id === currentSection
+            );
+            setCurrentHeadings(filteredHeadings);
+        }
+    }, [currentSection, sections]);
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -45,7 +65,7 @@ function WorksheetForm() {
                         <li
                             key={section._id}
                             className={`step ${done ? 'step-primary' : ''} ${active ? 'step-secondary' : ''}`}
-                            onClick={() => setCurrentSection(index)}
+                            onClick={() => goToStep(index)}
                             style={{ cursor: 'pointer' }}
                         >
                             {section.name}
@@ -56,12 +76,13 @@ function WorksheetForm() {
 
             {/* Current Section */}
             <form onSubmit={handleSubmit} className="card p-4">
-                {sections && sections[currentSection] && (
+
+                {sections &&  (
                     <div className="mb-4">
                         <div className="card-title">{sections[currentSection].name}</div>
-                        {sections[currentSection].description && (
-                            <div className="text-sm text-muted">{sections[currentSection].description}</div>
-                        )}
+                        {currentHeadings.map((heading) => (
+                            <div className='card-body' key={heading.id}>{heading.name}</div>
+                        ))}
                     </div>
                 )}
 
@@ -76,7 +97,6 @@ function WorksheetForm() {
                     </div>
 
                     <div>
-                        {/* require all sections to be completed before enabling submit */}
                         <button type="submit" className="btn btn-success" disabled={total === 0}>
                             Submit Worksheet
                         </button>
