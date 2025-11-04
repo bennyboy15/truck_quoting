@@ -1,10 +1,15 @@
 import express from "express";
-import { getSections, createSection } from "../controllers/worksheet.controller.js";
+import { getSections, createSection, createHeading, getHeadings } from "../controllers/worksheet.controller.js";
 import {protectRoute} from "../middleware/auth.middleware.js";
 
 const router = express.Router();
 
+// GET
 router.get("/section", protectRoute, getSections);
+router.get("/heading", protectRoute, getHeadings);
+
+// POST
 router.post("/section", protectRoute, createSection);
+router.post("/heading", protectRoute, createHeading);
 
 export default router;
