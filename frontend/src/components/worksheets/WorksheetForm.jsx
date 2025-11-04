@@ -2,28 +2,29 @@ import { useQuery } from '@tanstack/react-query';
 import { useState, useEffect } from 'react'
 import { axiosInstance } from '../../lib/axios';
 
-const headings = [
-  { id: 1, section_id: 1, name: "Freight", desc: "How the truck will be delivered to the workshop" },
-  { id: 2, section_id: 1, name: "Pre-Delivery", desc: "" },
-  { id: 3, section_id: 1, name: "Fire-Extinguisher", desc: "" },
-]
-
 function WorksheetForm() {
     const [currentSection, setCurrentSection] = useState(0);
     const [currentHeadings, setCurrentHeadings] = useState([]);
     const [answers, setAnswers] = useState({});
 
-    const {data: sections} = useQuery({
+    const { data: sections } = useQuery({
         queryKey: ["sections"],
         queryFn: async () => {
             const res = await axiosInstance.get("/worksheet/section");
             return res.data;
         }
-    })
+    });
+
+    const { data: headings } = useQuery({
+        queryKey: ["headings"],
+        queryFn: async () => {
+            const res = await axiosInstance.get("/worksheet/heading");
+            return res.data;
+        }
+    });
 
     const total = sections?.length ?? 0;
-
-    function goNext(){
+    function goNext() {
         setCurrentSection((c) => {
             // clamp to last available index
             if (total === 0) return 0
@@ -31,11 +32,11 @@ function WorksheetForm() {
         });
     }
 
-    function goPrev(){
+    function goPrev() {
         setCurrentSection((c) => Math.max(c - 1, 0));
     }
 
-    function goToStep(index){
+    function goToStep(index) {
         setCurrentSection(index);
     }
 
@@ -43,10 +44,11 @@ function WorksheetForm() {
     useEffect(() => {
         if (sections && sections[currentSection]) {
             const filteredHeadings = headings.filter(
-                (heading) => heading.section_id === currentSection
+                (heading) => (heading.section.section_id)-1 === currentSection
             );
             setCurrentHeadings(filteredHeadings);
-        }
+        };
+        console.log(currentHeadings);
     }, [currentSection, sections]);
 
     function handleSubmit(e) {
@@ -77,7 +79,7 @@ function WorksheetForm() {
             {/* Current Section */}
             <form onSubmit={handleSubmit} className="card p-4">
 
-                {sections &&  (
+                {sections && (
                     <div className="mb-4">
                         <div className="card-title">{sections[currentSection].name}</div>
                         {currentHeadings.map((heading) => (
