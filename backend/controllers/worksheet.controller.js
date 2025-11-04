@@ -43,12 +43,17 @@ export async function createHeading(req,res) {
     try {
         const {name, section, orderId} = req.body;
 
-        if (!name || !section || !orderId) {
+        if (!name || !section || orderId === undefined) {
             return res.status(400).json({message: "Missing required fields"});
         }
 
-        const sectionId = parseInt(section);
-        const newHeading = new Heading({orderId, name, section:sectionId});
+        // Remove parseInt since section should be an ObjectId string
+        const newHeading = new Heading({
+            name,
+            section, // Keep as string to let Mongoose handle ObjectId casting
+            orderId: Number(orderId)
+        });
+        
         await newHeading.save();
         return res.status(201).json(newHeading);
     } catch (error) {
