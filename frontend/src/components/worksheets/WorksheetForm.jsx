@@ -44,7 +44,7 @@ function WorksheetForm() {
     useEffect(() => {
         if (sections && sections[currentSection]) {
             const filteredHeadings = headings.filter(
-                (heading) => (heading.section.section_id)-1 === currentSection
+                (heading) => (heading.section.section_id) - 1 === currentSection
             );
             setCurrentHeadings(filteredHeadings);
         };
@@ -77,34 +77,53 @@ function WorksheetForm() {
             </ul>
 
             {/* Current Section */}
-            <form onSubmit={handleSubmit} className="card p-4">
-
+            <form onSubmit={handleSubmit} className="card p-6 border border-base-300 bg-white shadow-md">
                 {sections && (
-                    <div className="mb-4">
-                        <div className="card-title">{sections[currentSection].name}</div>
-                        {currentHeadings.map((heading) => (
-                            <div className='card-body' key={heading.id}>{heading.name}</div>
-                        ))}
-                    </div>
+                    <>
+                        <div className="card-title mb-4">
+                            {sections[currentSection].name}
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {currentHeadings.map((heading) => (
+                                <div className="card-body border border-base-200 rounded p-4" key={heading.id}>
+                                    {heading.name}
+                                </div>
+                            ))}
+                        </div>
+                    </>
                 )}
 
-                <div className="flex gap-2 justify-between">
-                    <div>
-                        <button type="button" className="btn" onClick={goPrev} disabled={currentSection === 0}>
+                <div className="flex flex-col md:flex-row justify-between items-center gap-3 mt-6">
+                    <div className="flex gap-2">
+                        <button
+                            type="button"
+                            className="btn"
+                            onClick={goPrev}
+                            disabled={currentSection === 0}
+                        >
                             Prev
                         </button>
-                        <button type="button" className="btn btn-primary ml-2" onClick={goNext} disabled={total === 0}>
+                        <button
+                            type="button"
+                            className="btn btn-primary"
+                            onClick={goNext}
+                            disabled={total === 0}
+                        >
                             Next
                         </button>
                     </div>
 
-                    <div>
-                        <button type="submit" className="btn btn-success" disabled={total === 0}>
-                            Submit Worksheet
-                        </button>
-                    </div>
+                    <button
+                        type="submit"
+                        className="btn btn-success w-full md:w-auto"
+                        disabled={total === 0}
+                    >
+                        Submit Worksheet
+                    </button>
                 </div>
             </form>
+
         </div>
     )
 }

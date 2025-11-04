@@ -7,18 +7,18 @@ export default function HeadingForm() {
 
     const queryClient = useQueryClient();
 
-    const [form, setForm] = useState({
-        name: "",
-        section: "",
-        orderId: 0  // Start at 0 or 1 instead of -1
-    });
-
     const { data: sections, isPending: isSectionsLoading } = useQuery({
         queryKey: ["sections"],
         queryFn: async () => {
             const res = await axiosInstance.get("/worksheet/section");
             return res.data;
         }
+    });
+
+    const [form, setForm] = useState({
+        name: "",
+        section: "",
+        orderId: 0  // Start at 0 or 1 instead of -1
     });
 
     const { mutate: createHeading, isPending } = useMutation({
@@ -47,13 +47,13 @@ export default function HeadingForm() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        
+
         // Validate form
         if (!form.name.trim()) {
             toast.error("Name is required");
             return;
         }
-        
+
         if (!form.section) {
             toast.error("Please select a section");
             return;

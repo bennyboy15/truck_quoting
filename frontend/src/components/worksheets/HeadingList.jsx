@@ -18,7 +18,7 @@ function HeadingList() {
                 {/* head */}
                 <thead>
                     <tr>
-                        <th>Section ID</th>
+                        <th>Order ID</th>
                         <th>Name</th>
                         <th>Description</th>
                     </tr>
