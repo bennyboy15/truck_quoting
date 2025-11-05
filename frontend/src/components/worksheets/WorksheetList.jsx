@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Eye } from "lucide-react";
 export default function WorksheetList(){
     return (
-        <ul className="list bg-base-100 rounded-box shadow-md border border-base-300">
+        <ul className="list bg-white rounded-box shadow-md border border-base-300">
 
             <li className="flex justify-between p-4 pb-2 text-md opacity-60 tracking-wide">
                 <div>Worksheets</div>

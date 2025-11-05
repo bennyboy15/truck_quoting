@@ -1,11 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
 import { axiosInstance } from "../../lib/axios";
+import AnswerSummary from "./AnswerSummary";
 
 function WorksheetForm() {
     const [currentSection, setCurrentSection] = useState(0);
     const [currentHeadings, setCurrentHeadings] = useState([]);
     const [answers, setAnswers] = useState({}); // Format will be: { sectionId: { headingId: selectedValue } }
+    const [answerSummary, setAnswerSummary] = useState([]);
 
     // Get sections
     const { data: sections } = useQuery({
@@ -105,6 +107,9 @@ function WorksheetForm() {
 
         return summary;
     }
+    useEffect(() => {
+        setAnswerSummary(getAnswerSummary());
+    }, [answers]);
 
     return (
         <div className="flex flex-col gap-6">
@@ -228,36 +233,7 @@ function WorksheetForm() {
                 </div>
             </form>
 
-            {/* Add this after the form */}
-            <div className="card p-6 border border-base-300 bg-white shadow-md">
-                <h3 className="card-title mb-4">Answer Summary</h3>
-                {getAnswerSummary().length > 0 ? (
-                    <div className="overflow-x-auto">
-                        <table className="table table-zebra">
-                            <thead>
-                                <tr>
-                                    <th>Section</th>
-                                    <th>Heading</th>
-                                    <th>Answer</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {getAnswerSummary().map((item, index) => (
-                                    <tr key={index}>
-                                        <td>{item.section}</td>
-                                        <td>{item.heading}</td>
-                                        <td>{item.answer}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-                ) : (
-                    <div className="text-center text-base-content/60 py-4">
-                        No answers selected yet
-                    </div>
-                )}
-            </div>
+            <AnswerSummary answers={answerSummary}/>
         </div>
     );
 }
