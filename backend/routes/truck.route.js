@@ -1,11 +1,12 @@
 import {protectRoute} from "../middleware/auth.middleware.js"
 import express from "express";
-import { getTrucks, createMake, createModel, createTruck, getMakes, getModels } from "../controllers/truck.controller.js";
+import { getTruck, getTrucks, createMake, createModel, createTruck, getMakes, getModels } from "../controllers/truck.controller.js";
 
 const router = new express.Router();
 
 // READ
 router.get("/", protectRoute, getTrucks);
+router.get("/:id", protectRoute, getTruck);
 router.get("/make", protectRoute, getMakes);
 router.get("/model", protectRoute, getModels);
 

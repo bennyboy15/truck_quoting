@@ -113,7 +113,7 @@ export default function TruckCard({ truck = {} }) {
 
           <div className="flex items-center gap-2">
             <Link
-              to={`/truck/${_id}`}
+              to={`/trucks/${_id}`}
               className="btn btn-sm btn-ghost"
               aria-label={`View details for ${stockNo ?? 'truck'}`}
             >
