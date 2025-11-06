@@ -12,7 +12,7 @@ function SectionList() {
     })
 
     return (
-        <div className="bg-white overflow-x-auto border border-base-300 rounded shadow-lg transition-transform duration-300 ease-in-out hover:scale-101">
+        <div className="bg-white overflow-x-auto border border-base-300 rounded">
 
             <table className="table">
                 {/* head */}
