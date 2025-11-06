@@ -6,6 +6,7 @@ import SectionForm from "../../components/worksheets/SectionForm.jsx";
 import SectionList from "../../components/worksheets/SectionList.jsx";
 import HeadingList from "../../components/worksheets/HeadingList.jsx";
 import HeadingForm from "../../components/worksheets/HeadingForm.jsx";
+import OptionsList from "../../components/options/OptionsList.jsx";
 
 function AdminPage() {
 
@@ -34,6 +35,10 @@ function AdminPage() {
       </Modal>
       
       <HeadingList/>
+
+      {/* Options viewer */}
+      <div className="divider" />
+      <OptionsList/>
 
     </div>
   )

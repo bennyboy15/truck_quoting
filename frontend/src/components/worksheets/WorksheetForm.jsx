@@ -2,8 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
 import { axiosInstance } from "../../lib/axios";
 import AnswerSummary from "./AnswerSummary";
+import toast from "react-hot-toast";
 
-function WorksheetForm() {
+function WorksheetForm({ make, model }) {
     const [currentSection, setCurrentSection] = useState(0);
     const [currentHeadings, setCurrentHeadings] = useState([]);
     const [answers, setAnswers] = useState({}); // Format will be: { sectionId: { headingId: selectedValue } }
@@ -26,6 +27,19 @@ function WorksheetForm() {
         },
     });
 
+    // Get options
+    const { data: options } = useQuery({
+        queryKey: ["options", make?.id, model?.id],
+        queryFn: async () => {
+            const params = new URLSearchParams();
+            if (make) params.append('make', make.id);
+            if (model) params.append('model', model.id);
+
+            const res = await axiosInstance.get(`/worksheet/options?${params}`);
+            return res.data;
+        },
+    });
+
     // Section Navigators
     const total = sections?.length ?? 0;
     function goNext() {
@@ -44,45 +58,57 @@ function WorksheetForm() {
 
     // Use useEffect to handle heading updates when currentSection changes
     useEffect(() => {
-        if (sections && sections[currentSection]) {
-            const filteredHeadings = headings?.filter(
-                (heading) => heading.section.section_id - 1 === currentSection
-            );
-            setCurrentHeadings(filteredHeadings);
+        if (sections && sections[currentSection] && headings) {
+            const filteredHeadings = headings.filter((heading) => {
+                // heading.section can be populated object or a primitive id/number
+                const sec = heading.section;
+                const sectionId = sec?.section_id ?? (typeof sec === "number" ? sec : null);
+                return sectionId !== null && sectionId - 1 === currentSection;
+            });
+            setCurrentHeadings(filteredHeadings || []);
+        } else {
+            setCurrentHeadings([]);
         }
-        console.log(currentHeadings);
-    }, [currentSection, sections]);
+    }, [currentSection, sections, headings]);
 
-    // Add options state (you can fetch these from API if needed)
-    const options = [
-        { id: 1, label: "Option 1", value: 1 },
-        { id: 2, label: "Option 2", value: 2 },
-        // Add more options as needed
-    ];
+    // Update the submission handler
+    async function handleSubmit(e) {
+        e.preventDefault();
+        try {
+            await axiosInstance.post("/worksheet/submit", {
+                make: make.id,
+                model: model.id,
+                answers
+            });
+            toast.success("Worksheet submitted successfully");
+        } catch (error) {
+            toast.error(error?.response?.data?.message || "Failed to submit worksheet");
+        }
+    }
 
-    function updateAnswers(sectionId, headingId, value) {
-        setAnswers((prev) => ({
+    // Update the updateAnswer function to store option._id instead of option.value
+    function updateAnswer(sectionId, headingId, optionId) {
+        if (!optionId) {
+            setAnswers(prev => ({
+                ...prev,
+                [sectionId]: {
+                    ...prev[sectionId],
+                    [headingId]: null
+                }
+            }));
+            return;
+        }
+
+        setAnswers(prev => ({
             ...prev,
             [sectionId]: {
                 ...prev[sectionId],
-                [headingId]: value,
-            },
+                [headingId]: optionId // store the _id instead of value
+            }
         }));
     }
 
-    // Helper to check if a heading has been answered
-    function getHeadingAnswer(sectionId, headingId) {
-        return answers[sectionId]?.[headingId];
-    }
-
-    // Update the submit handler
-    function handleSubmit(e) {
-        e.preventDefault();
-        console.log("Worksheet submitted", answers);
-        // Add your API call here to save the answers
-    }
-
-    // Add this helper function to get answer summaries
+    // Update the getAnswerSummary function
     function getAnswerSummary() {
         if (!sections || !headings) return [];
 
@@ -91,9 +117,9 @@ function WorksheetForm() {
         Object.entries(answers).forEach(([sectionId, headingAnswers]) => {
             const section = sections.find((s) => s.section_id === parseInt(sectionId));
 
-            Object.entries(headingAnswers).forEach(([headingId, value]) => {
+            Object.entries(headingAnswers).forEach(([headingId, optionId]) => {
                 const heading = headings.find((h) => h._id === headingId);
-                const selectedOption = options.find((opt) => opt.value === value);
+                const selectedOption = options?.find((opt) => opt._id === optionId);
 
                 if (section && heading && selectedOption) {
                     summary.push({
@@ -109,7 +135,21 @@ function WorksheetForm() {
     }
     useEffect(() => {
         setAnswerSummary(getAnswerSummary());
-    }, [answers]);
+    }, [answers, options, sections, headings]);
+
+    // Add this helper to get options for a specific heading
+    function getOptionsForHeading(headingId) {
+        if (!options) return [];
+        return options.filter(opt => {
+            const optHeadingId = opt.heading?._id ?? opt.heading;
+            return String(optHeadingId) === String(headingId);
+        });
+    }
+
+    // Helper to get current answer
+    function getCurrentAnswer(sectionId, headingId) {
+        return answers[sectionId]?.[headingId];
+    }
 
     return (
         <div className="flex flex-col gap-6">
@@ -133,10 +173,7 @@ function WorksheetForm() {
             </ul>
 
             {/* Current Section */}
-            <form
-                onSubmit={handleSubmit}
-                className="card p-6 border border-base-300 bg-white shadow-md"
-            >
+            <form onSubmit={handleSubmit} className="card p-6 border border-base-300 bg-white shadow-md">
                 {sections && (
                     <>
                         <div className="card-title mb-4">
@@ -144,59 +181,48 @@ function WorksheetForm() {
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {currentHeadings?.map((heading) => (
-                                <div className="card-body border border-base-200 rounded p-4" key={heading._id}>
-                                    <h3 className="font-semibold">{heading.name}</h3>
-                                    <div className="dropdown">
-                                        <div tabIndex={0} role="button" className="btn m-1 w-full justify-between">
-                                            {getHeadingAnswer(
-                                                sections[currentSection].section_id,
-                                                heading._id
-                                            )
-                                                ? options.find(
-                                                    (opt) =>
-                                                        opt.value ===
-                                                        getHeadingAnswer(
-                                                            sections[currentSection].section_id,
-                                                            heading._id
-                                                        )
-                                                )?.label
-                                                : "Select Option..."}
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-chevron-down" viewBox="0 0 16 16">
-                                                <path fillRule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
-                                            </svg>
-                                        </div>
-                                        <ul
-                                            tabIndex={0}
-                                            className="dropdown-content menu bg-base-100 rounded-box z-1 w-full p-2 shadow-lg"
+                            {currentHeadings?.map((heading) => {
+                                const headingOptions = getOptionsForHeading(heading._id);
+                                const currentValue = getCurrentAnswer(
+                                    sections[currentSection].section_id,
+                                    heading._id
+                                );
+
+                                return (
+                                    <div className="card-body border border-base-200 rounded p-4"
+                                        key={heading._id}
+                                    >
+                                        <h3 className="font-semibold">{heading.name}</h3>
+                                        <select
+                                            className="select select-bordered w-full"
+                                            value={currentValue ?? ""} // use nullish coalescing
+                                            onChange={(e) => {
+                                                const optionId = e.target.value;
+                                                updateAnswer(
+                                                    sections[currentSection].section_id,
+                                                    heading._id,
+                                                    optionId
+                                                );
+                                            }}
                                         >
-                                            {options.map((option) => (
-                                                <li key={option.id}>
-                                                    <a
-                                                        onClick={() =>
-                                                            updateAnswers(
-                                                                sections[currentSection].section_id,
-                                                                heading._id,
-                                                                option.value
-                                                            )
-                                                        }
-                                                        className={
-                                                            getHeadingAnswer(
-                                                                sections[currentSection].section_id,
-                                                                heading._id
-                                                            ) === option.value
-                                                                ? "active"
-                                                                : ""
-                                                        }
-                                                    >
-                                                        {option.label}
-                                                    </a>
-                                                </li>
+                                            <option value="">Select an option</option>
+                                            {headingOptions.map((opt) => (
+                                                <option
+                                                    key={opt._id}
+                                                    value={opt._id} // use _id instead of value
+                                                >
+                                                    {opt.label}
+                                                </option>
                                             ))}
-                                        </ul>
+                                        </select>
+                                        {headingOptions.length === 0 && (
+                                            <p className="text-sm text-error mt-2">
+                                                No options available for this heading
+                                            </p>
+                                        )}
                                     </div>
-                                </div>
-                            ))}
+                                );
+                            })}
                         </div>
                     </>
                 )}
@@ -233,7 +259,9 @@ function WorksheetForm() {
                 </div>
             </form>
 
-            <AnswerSummary answers={answerSummary}/>
+            <AnswerSummary answers={answerSummary} />
+
+            <button className="btn" onClick={() => console.log(options)}>GET OPTIONS</button>
         </div>
     );
 }

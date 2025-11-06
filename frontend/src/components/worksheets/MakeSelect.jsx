@@ -1,8 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
 import { axiosInstance } from '../../lib/axios';
 
-function MakeSelect() {
+function MakeSelect({ selectedMake, setSelectedMake, selectedModel, setSelectedModel }) {
 
   const { data: truckMakes } = useQuery({
     queryKey: ["truckMakes"],
@@ -19,9 +18,6 @@ function MakeSelect() {
       return res.data
     }
   });
-
-  const [selectedMake, setSelectedMake] = useState(null); 
-  const [selectedModel, setSelectedModel] = useState(null); 
 
   const filteredModels = selectedMake
     ? truckModels?.filter(m => {
