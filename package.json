@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon backend/server.js",
     "start": "node backend/server.js",
-    "seed:options": "node backend/seeds/options.seed.js"
+    "seed:options": "node backend/seeds/options.seed.js",
+    "seed:headings": "node backend/seeds/headings.seed.js"
   },
   "repository": {
     "type": "git",
